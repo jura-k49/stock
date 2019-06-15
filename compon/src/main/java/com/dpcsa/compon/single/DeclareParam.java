@@ -36,6 +36,9 @@ public class DeclareParam {
         if (params.defaultMethod != ParamModel.GET) {
             ParamModel.setDefaultMethod(params.defaultMethod);
         }
+        if (params.initialLanguage.length() > 0) {
+            setLocale(params.initialLanguage);
+        }
         return this;
     }
 
@@ -49,14 +52,13 @@ public class DeclareParam {
         return this;
     }
 
-    public DeclareParam setLocale(String locale, String nameParam) {
+    public void setLocale(String locale) {
         String loc = preferences.getLocale();
         if (loc.length() == 0 ) {
             loc = locale;
             preferences.setLocale(locale);
         }
-        componGlob.addParamValue(nameParam, loc);
-        return this;
+        componGlob.addParamValue(componGlob.appParams.nameLanguageInParam, loc);
     }
 
     public DeclareParam setDB(BaseDB baseDB) {

@@ -14,9 +14,13 @@ public abstract class AppParams<T> {
     public Class<T>  classProgress;
     public Class<T>  classErrorDialog;
     public String nameTokenInHeader = "";
+
     public String nameLanguageInHeader = "";
+    public String nameLanguageInParam = "";
+    public String initialLanguage = "";
+
     public boolean nameLanguageInURL = false;
-    public abstract void setParams();
+
     public int errorDialogViewId = 0;
     public int progressViewId = 0;
     public int idStringERRORINMESSAGE = 0;
@@ -28,6 +32,7 @@ public abstract class AppParams<T> {
     public int idStringJSONSYNTAXERROR = 0;
     public int defaultMethod = ParamModel.GET;
 
+    public abstract void setParams();
     public AppParams() {
         setParams();
     }

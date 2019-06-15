@@ -82,12 +82,27 @@ public class RecyclerComponent extends BaseComponent {
             int ik = listData.size();
             if (ik > 0) {
                 if (selectStart == -1) {
-                    for (int i = 0; i < ik; i++) {
-                        Record r = listData.get(i);
-                        int j = r.getInt(paramMV.paramView.fieldType);
-                        if (j == 1) {
-                            selectStart = i;
-                            break;
+                    if (paramMV.paramView.selectNameField.length() > 0) {
+                        String selVal = paramMV.paramView.selectValueField;
+                        if (selVal.length() == 0) {
+                            selVal = getComponTools().getLocale();
+                        }
+                        for (int i = 0; i < ik; i++) {
+                            Record r = listData.get(i);
+                            String sel = r.getString(paramMV.paramView.selectNameField);
+                            if (sel != null && sel.equals(selVal)) {
+                                selectStart = i;
+                                break;
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < ik; i++) {
+                            Record r = listData.get(i);
+                            int j = r.getInt(paramMV.paramView.fieldType);
+                            if (j == 1) {
+                                selectStart = i;
+                                break;
+                            }
                         }
                     }
                 } else {

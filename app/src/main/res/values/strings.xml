@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SkladTehnika</string>
+    <string name="app_name">Stock</string>
     <string name="google_maps_key">AIzaSyAPYR4EO-U2deKsKbXyNLR06ynnVaO0jCA</string>
     <string name="youtube_api_key">AIzaSyBXIkt2yT92DWzjRLs3n9oPcd2B7iKRzfs</string>
 
@@ -24,6 +24,7 @@
     <string name="ru">Русский</string>
     <string name="en">English</string>
     <string name="sel_lang">Выберіть мову</string>
+    <string name="jsonListLang">[{\"id_language\":\"ru\",\"name_language\":\"Русский\"},{\"id_language\":\"uk\",\"name_language\":\"Українська\"},{\"id_language\":\"en\",\"name_language\":\"English\"}]</string>
 
     // Categories
     <string name="sht">шт</string>

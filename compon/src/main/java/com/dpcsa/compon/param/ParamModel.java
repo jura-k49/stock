@@ -31,6 +31,7 @@ public class ParamModel <T> {
     public static final int DATAFIELD = 104;
     public static final int GLOBAL = 105;
     public static final int COUNTRY_CODE = 106;
+    public static final int JSON = 107;
     public static int defaultMethod = GET;
     public String nameField, nameFieldTo;
     public DataFieldGet dataFieldGet;

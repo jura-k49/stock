@@ -29,7 +29,7 @@ public abstract class DeclareScreens<T>{
     protected FilterParam.Operation FO;
     protected ViewHandler.TYPE_PARAM_FOR_SCREEN PS;
     public abstract void declare();
-    protected int GET = ParamModel.GET, POST = ParamModel.POST,
+    protected int GET = ParamModel.GET, POST = ParamModel.POST, JSON = ParamModel.JSON,
             GET_DB = ParamModel.GET_DB, POST_DB = ParamModel.POST_DB, UPDATE_DB = ParamModel.UPDATE_DB,
             INSERT_DB = ParamModel.INSERT_DB, DEL_DB = ParamModel.DEL_DB, PARENT = ParamModel.PARENT,
             FIELD = ParamModel.FIELD, ARGUMENTS = ParamModel.ARGUMENTS, COUNTRY_CODE = ParamModel.COUNTRY_CODE,
@@ -41,6 +41,10 @@ public abstract class DeclareScreens<T>{
     public DeclareScreens() {
         componGlob = Injector.getComponGlob();
         MapScreen = componGlob.MapScreen;
+    }
+
+    protected String getString(int stringId) {
+        return componGlob.context.getResources().getString(stringId);
     }
 
     public void initScreen() {
@@ -250,6 +254,14 @@ public abstract class DeclareScreens<T>{
         return new ViewHandler(viewId, screen);
     }
 
+    public ViewHandler start(int viewId, String screen, ViewHandler.TYPE_PARAM_FOR_SCREEN paramForScreen) {
+        return new ViewHandler(viewId, screen, paramForScreen);
+    }
+
+    public ViewHandler start(String screen, ViewHandler.TYPE_PARAM_FOR_SCREEN paramForScreen) {
+        return new ViewHandler(0, screen, paramForScreen);
+    }
+
     public ViewHandler start(String screen) {
         return new ViewHandler(0, screen);
     }
@@ -379,11 +391,11 @@ public abstract class DeclareScreens<T>{
         return new ViewHandler(viewId, ViewHandler.TYPE.ASSIGN_VALUE);
     }
 
-    public ViewHandler startScreen(String screen) {
-        return new ViewHandler(0, screen);
-//        viewHandlers.add(new ViewHandler(0, screen));
-//        return this;
-    }
+//    public ViewHandler startScreen(String screen) {
+//        return new ViewHandler(0, screen);
+////        viewHandlers.add(new ViewHandler(0, screen));
+////        return this;
+//    }
 
     public ViewHandler showComponent(int viewId) {
         return new ViewHandler(0, ViewHandler.TYPE.SHOW, viewId);

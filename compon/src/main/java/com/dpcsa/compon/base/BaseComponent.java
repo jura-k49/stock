@@ -177,6 +177,22 @@ public abstract class BaseComponent {
                 case ParamModel.FIELD:
                     changeDataBase(paramModel.field);
                     break;
+                case ParamModel.JSON:
+                    Field ffJson = null;
+                    try {
+                        ffJson = componGlob.jsonSimple.jsonToModel(paramModel.url);
+                    } catch (JsonSyntaxException e) {
+                        iBase.log(e.getMessage());
+                        e.printStackTrace();
+                    }
+                    if (ffJson != null) {
+//                        ListRecords lr = (ListRecords)ffJson.value;
+//                        for (Record rec : lr) {
+//                            Log.d("QWERT","RRR="+rec);
+//                        }
+                        changeDataBase(ffJson);
+                    }
+                    break;
                 case ParamModel.COUNTRY_CODE:
                     GetCountryCode gcc = new GetCountryCode();
                     gcc.getCountryCode(iBase, listener, paramMV.paramModel.url);

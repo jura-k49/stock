@@ -127,72 +127,11 @@ public class PlusMinus extends AppCompatEditText {
                                 setSelection(st1.length());
                             }
                             setValue(i);
-//                            if (field != null) {
-//                                if (field.type == Field.TYPE_LONG) {
-//                                    field.value = new Long(i);
-//                                } else {
-//                                    field.value = i;
-//                                }
-//                            }
-//                            execNavigator(i);
-//                            for (Multiply m : plusMinusComponent.paramMV.multiplies) {
-//                                Float mult = record.getFloat(m.nameField);
-//                                if (mult != null) {
-//                                    TextView tv = parentView.findViewById(m.viewId);
-//                                    Float ff = mult * i;
-//                                    if (tv != null) {
-//                                        if (tv instanceof IComponent) {
-//                                            ((IComponent) tv).setData(ff);
-//                                        } else {
-//                                            tv.setText(String.valueOf(ff));
-//                                        }
-//                                    }
-//                                    if (m.nameFieldRes != null && m.nameFieldRes.length() > 0) {
-//                                        Field field = record.getField(m.nameFieldRes);
-//                                        if (field != null) {
-//                                            switch (field.type) {
-//                                                case Field.TYPE_DOUBLE:
-//                                                    Double d = Double.valueOf(ff);
-//                                                    field.value = d;
-//                                                    break;
-//                                                case Field.TYPE_FLOAT:
-//                                                    field.value = ff;
-//                                                    break;
-//                                                case Field.TYPE_INTEGER:
-//                                                    float ii = ff;
-//                                                    Integer in = Integer.valueOf((int) ii);
-//                                                    field.value = in;
-//                                                    break;
-//                                                case Field.TYPE_LONG:
-//                                                    float iL = ff;
-//                                                    Long lon = Long.valueOf((long) iL);
-//                                                    field.value = lon;
-//                                                    break;
-//                                            }
-//                                        } else {
-//                                            record.add(new Field(m.nameFieldRes, Field.TYPE_FLOAT, ff));
-//                                        }
-//                                    }
-//                                }
-//                            }
-
-
                         }
-
-
-//                        iBase.sendEvent(plusMinusComponent.paramMV.paramView.viewId);
-//                        iCustom = PlusMinus.this.component.iCustom;
-//                        if (iCustom != null) {
-//                            iCustom.changeValue(getId(), null);
-//                        }
-
-
                     }
                 });
             }
         }
-
-//        setText(getText());
 
         if (plusMinusComponent != null) {
             plusId = plusMinusComponent.paramMV.paramView.layoutTypeId[0];

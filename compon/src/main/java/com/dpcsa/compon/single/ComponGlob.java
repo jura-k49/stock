@@ -34,7 +34,7 @@ public class ComponGlob {
     public List<Param> paramValues = new ArrayList<>();
     public String token;
     public Record globalData;
-    private JsonSimple jsonSimple = new JsonSimple();
+    public JsonSimple jsonSimple = new JsonSimple();
 //    public String language;
 
     public ComponGlob(Context context) {

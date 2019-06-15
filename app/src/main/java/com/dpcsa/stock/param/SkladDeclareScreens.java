@@ -6,7 +6,6 @@ import com.dpcsa.compon.json_simple.Field;
 import com.dpcsa.compon.param.ParamMap;
 import com.dpcsa.stock.R;
 import com.dpcsa.stock.activity.YouTubeActivity;
-import com.dpcsa.stock.data.GetData;
 import com.dpcsa.stock.more_work.FormTextMore;
 import com.dpcsa.stock.more_work.ItemServiceMore;
 
@@ -23,13 +22,11 @@ public class SkladDeclareScreens extends DeclareScreens {
 
         activity(MAIN, R.layout.activity_main)
                 .fragmentsContainer(R.id.content_frame)
-                .navigator(handler(R.id.apply, VH.SET_LOCALE, "id_language"))
+                .navigator(handler(R.id.apply, VH.SET_LOCALE))
                 .menuBottom(R.id.nav, HOME, REPAIRS_MAIN, ABOUT, NEWS)
                 .component(TC.RECYCLER,             // меню вибору мови
-                        model(new GetData()),
-                        view(R.id.recycler, new int[] {R.layout.item_lang, R.layout.item_lang_sel}).selected());
-
-
+                        model(JSON, getString(R.string.jsonListLang)),
+                        view(R.id.recycler, new int[] {R.layout.item_lang, R.layout.item_lang_sel}).selected("id_language"));
 
         fragment(HOME, R.layout.fragment_home)
                 .setValue(item(R.id.lang_txt, TS.LOCALE))
@@ -37,7 +34,7 @@ public class SkladDeclareScreens extends DeclareScreens {
                 .component(TC.RECYCLER,
                         model(API.CATEGORIES, 1).sort("order"),
                         view(R.id.recycler, R.layout.item_home),
-                        navigator(handler(0, CATEGORY, PS.RECORD)));
+                        navigator(start(CATEGORY, PS.RECORD)));
 
 
 
@@ -45,8 +42,6 @@ public class SkladDeclareScreens extends DeclareScreens {
                 .setValue(item(R.id.lang_txt, TS.LOCALE))
                 .navigator(show(R.id.sel_lang, R.id.lang, true),
                         start(R.id.apply, SERVICE, true));
-
-
 
         fragment(SERVICE, R.layout.fragment_service).animate(AS.RL)
                 .componentMap(R.id.map, model(API.MARKER_MAP), new ParamMap(true)
@@ -61,8 +56,6 @@ public class SkladDeclareScreens extends DeclareScreens {
                                         after(handler(0, VH.SET_GLOBAL, "services"),
                                                 start(R.id.cost, REPAIRS_CALC))),
                                 back(R.id.cost)), 0);
-
-
 
         fragment(REPAIRS_CALC, R.layout.fragment_repairs_calc).animate(AS.RL)
                 .navigator(back(R.id.back),
@@ -204,7 +197,7 @@ public class SkladDeclareScreens extends DeclareScreens {
                                 handler(R.id.edit, COMENT, PS.RECORD, "comment", after(assignValue(R.id.comment))),
                                 handler(R.id.apply, VH.CLICK_SEND,
                                         model(POST, API.SEND_FEEDBACK, "name,phone,comment"),
-                                        after(startScreen(BACK_THANKS)))))
+                                        after(start(BACK_THANKS)))))
                 .enabled(R.id.apply, R.id.name,  R.id.phone);
         fragment(BACK_THANKS, R.layout.fragment_back_thanks).animate(AS.RL)
                 .navigator(setMenu(R.id.apply), keyBack(R.id.apply));

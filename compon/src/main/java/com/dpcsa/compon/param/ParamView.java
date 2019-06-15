@@ -24,6 +24,7 @@ public class ParamView {
     public Visibility[] visibilityArray;
     public boolean selected = false, notify = false;
     public int maxItemSelect;
+    public String selectNameField = "", selectValueField = "";
     public List<Expanded> expandedList;
 
     public ParamView(int viewId) {
@@ -138,14 +139,29 @@ public class ParamView {
         return this;
     }
 
-    public ParamView notifyOnResume() {
-        notify = true;
-        return this;
-    }
-
     public ParamView selected(int maxItemSelect) {
         selected = true;
         this.maxItemSelect = maxItemSelect;
+        return this;
+    }
+
+    public ParamView selected(String selectNameField) {
+        this.selectNameField = selectNameField;
+        selected = true;
+        maxItemSelect = -1;
+        return this;
+    }
+
+    public ParamView selected(String selectNameField, String selectValueField) {
+        this.selectNameField = selectNameField;
+        this.selectValueField = selectValueField;
+        selected = true;
+        maxItemSelect = -1;
+        return this;
+    }
+
+    public ParamView notifyOnResume() {
+        notify = true;
         return this;
     }
 

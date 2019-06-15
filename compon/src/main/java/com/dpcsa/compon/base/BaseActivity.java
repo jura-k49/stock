@@ -38,7 +38,9 @@ import com.dpcsa.compon.components.MenuBottomComponent;
 import com.dpcsa.compon.dialogs.ProgressDialog;
 import com.dpcsa.compon.interfaces_classes.IComponent;
 import com.dpcsa.compon.interfaces_classes.ItemSetValue;
+import com.dpcsa.compon.param.AppParams;
 import com.dpcsa.compon.param.ParamComponent;
+import com.dpcsa.compon.single.DeclareParam;
 import com.dpcsa.compon.single.Injector;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -115,7 +117,23 @@ public abstract class BaseActivity extends FragmentActivity implements IBase {
         parentModelList = new ArrayList<>();
         preferences = Injector.getPreferences();
         componGlob = Injector.getComponGlob();
-        TAG = componGlob.appParams.NAME_LOG_APP;
+        if (componGlob == null) {
+            DeclareParam.build(this)
+                    .setNetworkParams(new AppParams() {
+                        @Override
+                        public void setParams() {
+
+                        }
+                    });
+            componGlob = Injector.getComponGlob();
+            preferences = Injector.getPreferences();
+            TAG = componGlob.appParams.NAME_LOG_APP;
+            log("0001 Library is not initialized.");
+            return;
+        } else {
+            TAG = componGlob.appParams.NAME_LOG_APP;
+        }
+
         mapFragment = componGlob.MapScreen;
         nameGlobalData = new ArrayList<>();
         animatePanelList = new ArrayList<>();
@@ -148,6 +166,10 @@ public abstract class BaseActivity extends FragmentActivity implements IBase {
 
         if (nameScreen != null && nameScreen.length() > 0) {
             mComponent = getComponent(nameScreen);
+            if (mComponent == null) {
+                log("0002 No description of the activity " + nameScreen);
+                return;
+            }
             if (mComponent.typeView == Screen.TYPE_VIEW.CUSTOM_ACTIVITY) {
                 parentLayout = inflate(this, getLayoutId(), null);
             } else {
@@ -377,6 +399,9 @@ public abstract class BaseActivity extends FragmentActivity implements IBase {
     public View.OnClickListener navigatorClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            if (mComponent.navigator == null) {
+                return;
+            }
             int id = view.getId();
             for (ViewHandler vh : mComponent.navigator.viewHandlers) {
                 if (vh.viewId == id) {
@@ -456,7 +481,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBase {
                             finishActivity();
                             break;
                         case SET_LOCALE:
-                            preferences.setLocale(componGlob.getParamValue(vh.nameFieldWithValue));
+                            preferences.setLocale(componGlob.getParamValue(componGlob.appParams.nameLanguageInParam));
                             recreate();
                             break;
                         case SET_GLOBAL:
@@ -687,7 +712,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBase {
         if (mc != null) {
             startActivitySimple(nameMVP, mc, object, -1);
         } else {
-            log("Нет Screens с именем " + nameMVP);
+            log("0003 No screen with name " + nameMVP);
         }
     }
 
@@ -883,7 +908,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBase {
 //        Log.d("QWERT","startScreen mComponent="+mComponent);
 //        String nameMVP = mComponent.nameComponent;
         if (mComponent == null || mComponent.typeView == null) {
-            log("Нет Screens с именем " + nameMVP);
+            log("0003 No screen with name " + nameMVP);
             return;
         }
         switch (mComponent.typeView) {

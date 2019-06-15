@@ -18,6 +18,9 @@ public class SkladAppParams extends AppParams {
         idStringTIMEOUT = R.string.er_timeout;
         idStringSERVERERROR = R.string.er_server_error;
         idStringJSONSYNTAXERROR = R.string.er_json_syntax;
+
+        nameLanguageInParam = "id_language";
+        initialLanguage = "uk";
 //        nameTokenInHeader = "Authorization";
 
 //        classProgress = ProgressDialog.class;

@@ -26,8 +26,7 @@ public class SkladApp extends MultiDexApplication {
 
         DeclareParam.build(context)
                 .setNetworkParams(new SkladAppParams())
-                .setDeclareScreens(new SkladDeclareScreens())
-                .setLocale("uk", "id_language");
+                .setDeclareScreens(new SkladDeclareScreens());
     }
 
 }

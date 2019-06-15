@@ -319,13 +319,13 @@ public class Screen<T>{
         return componentTotal(viewId, viewIdWithList, 0, visbil, nameFields);
     }
 
-    public Screen componentTotal(int viewId, int viewIdWithList, int viewEvent, Visibility[] visbil, String ... nameFields) {
+    public Screen componentTotal(int viewId, int viewIdWithList, int viewEvent, Visibility[] visibil, String ... nameFields) {
         ParamComponent paramComponent = new ParamComponent();
         paramComponent.type = ParamComponent.TC.TOTAL;
         ParamView pv = new ParamView(viewId);
         paramComponent.paramView = pv;
         pv.viewIdWithList = viewIdWithList;
-        pv.visibilityArray = visbil;
+        pv.visibilityArray = visibil;
         pv.nameFields = nameFields;
         paramComponent.eventComponent = viewEvent;
         listComponents.add(paramComponent);
